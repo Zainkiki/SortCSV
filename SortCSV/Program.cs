@@ -74,10 +74,8 @@ class Program
 
         List<string> cleanedLines = new List<string>();
 
-        // Keep the header
         cleanedLines.Add(lines[0]);
 
-        // Clean all other rows
         for (int i = 1; i < lines.Length; i++)
         {
             if (string.IsNullOrWhiteSpace(lines[i]))
@@ -91,7 +89,6 @@ class Program
             {
                 string value = fields[j].Trim();
 
-                // Remove null values
                 if (value.Equals("null", StringComparison.OrdinalIgnoreCase))
                 {
                     fields[j] = "";
@@ -105,7 +102,6 @@ class Program
             cleanedLines.Add(CreateCsvLine(fields));
         }
 
-        // Create the new filename
         string directory = Path.GetDirectoryName(inputFile)!;
         string filename = Path.GetFileNameWithoutExtension(inputFile);
 
@@ -138,7 +134,6 @@ class Program
 
             if (character == '"')
             {
-                // Double quotes inside a quoted field
                 if (insideQuotes &&
                     i + 1 < line.Length &&
                     line[i + 1] == '"')
